@@ -7,7 +7,7 @@
     background-color: #20232a;
     padding: 0 10px;
     font-family: sans-serif;
-    z-index: 2;
+    z-index: 100;
 }
 
 .menu-container .menu-desktop{
@@ -81,6 +81,8 @@
     
     .menu-movile{
         display: flex;
+        height: 100%;
+        align-items: center;
     }
 
     .menu-container {

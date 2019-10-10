@@ -2,7 +2,7 @@
 import React from 'react';
 import './styles/login.css'
 import logo from './images/money-bag.svg'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 class Login extends React.Component {
     render(){
         return(

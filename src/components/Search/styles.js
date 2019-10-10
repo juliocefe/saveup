@@ -1,25 +1,34 @@
 import styled from 'styled-components'
 
+
 export const SearchContainer = styled.div`
+    height: 100vh;
     display: flex;
+    /* top:100px; */
+    flex-direction:column;
     position: relative;
-    justify-content: center;
-    top: 100px;
-    padding: 5px 10px 20px 10px;
+    justify-content: flex-start;
+    padding: 5px 10px 0 10px;
     @media (max-width: 768px) {
-        padding-bottom: 3rem;
         border-bottom: lightgray solid 1px; 
     }
+    border-bottom: solid 1px gray;
 `
 
+// NO se está usando
 export const SearchBox = styled.div`
     position: relative;
     width: 300px;
     margin-right:5px;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 }
 `
 
 export const SearchInput = styled.input`
+    margin-top: 100px;
+    margin-bottom: 1rem;
     width: 100%;
     font-size: 14px;
     word-wrap: break-word;
@@ -28,7 +37,7 @@ export const SearchInput = styled.input`
     white-space: normal;
     min-height: 2em;
     background: #fff;
-    display: inline-block;
+    display: block;
     padding: 1em 2em 1em 1em;
     color: rgba(0,0,0,.87);
     box-shadow: none;
@@ -54,33 +63,5 @@ export const PlusBtn = styled.button`
    display:none;
 `
 
-// Lista de porductos
-export const  ProductsFiltered = styled.ul`
-    max-height: 12rem;
-    overflow: auto;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    width: 100%;
-    display: none;
-    border-left: 1px solid #ced4da;
-    border-right: 1px solid #ced4da;
-    border-bottom: 1px solid #ced4da;
-    box-shadow: 0 2px 3px 0 rgba(34,36,38,.15);
 
-    & li {
-        width: 100%;
-        padding: 5px 15px;
-        background-color: white; 
-
-        :focus{
-            background-color: #96c8da;
-        }
-        :hover{
-            background-color: #F7F7F7; 
-            background: #F7F7F7; 
-        }
-    }
-`
 
