@@ -1,54 +1,139 @@
-import React, {useEffect, useState, useMemo} from 'react'
+import React, { useState, useMemo, useEffect, Fragment} from 'react'
 import { Product } from '../Product'
 
 import { List, Item } from  './styles'
+import { SearchInput, PlusBtn } from  './styles'
 
+import { Modal } from './../../Modal'
+const { generateList } = require( './../../Api');
 
 export const ProductsList = ( props ) => {
-    // CUSTOM HOOK
-    //          SACARLO DE ESTE COMPONENTE, A UN GRADO MAS ARRIBA U ORGANIZARLO MEJOR
-    const [filteredProducts, setFilteredProducts] = useState(props.api.data)
-    
-    // Esto lo podemos mejorar bastante, separando el filtro debido a a los contadores, 
-    // por que n o va dejar de reacargarse, INVESTIGAR MAS ACERCA DE
-    useMemo( ()=>{
-        const products = props.api.data.filter(product=>{
-            for (let index = 0; index < props.carList.length; index++) {
-                const element = props.carList[index];
-                if(product.id==element.id){
-                    product.counter = element.cant
-                }
-                
-                // product.counter = addedProduct[0].cant
+    const [ filter, setFilter ] = useState('')
+    // La lista que vamos generando pero nunca la vemos
+    const [ carList, setCarList ] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
+    const [ generatedList, setGeneratedList ] = useState({data:[], 'goToBuy':false })
+    const [ modalVisible, setModalVisible ] = useState(false)
+
+    function toggleModal(){
+        setModalVisible(!modalVisible)
+    }
+    function handleAddProduct(id){
+        let Newlist = [...carList]
+        let isNew = true
+        for (let index = 0; index < Newlist.length; index++) {
+            const element = Newlist[index];
+            // Si el id es encontrado se suma la cantidad + 1
+            if(element.id===id){
+                Newlist[index].quantity =  Newlist[index].quantity +1
+                isNew = false
+                break
+            } 
+        }
+        //Si el producto es nuevo se agrega un nuevo objeto
+        if(isNew) Newlist.push( { id:id, quantity: 1 } )
+        setCarList(Newlist)
+    }
+    console.log('renderisando HIJO')
+    function handleRemoveProduct(id){
+        let Newlist = [...carList]
+        for (let index = 0; index < Newlist.length; index++) {
+            const element = Newlist[index];
+            if(element.id===id){
+                Newlist[index].quantity =  Newlist[index].quantity -1
+                // if(Newlist[index].quantity <= 0 ){
+                //     Newlist.splice(index,1)
+                // }
+                break
             }
-            return product.name.
-            toLowerCase().
-            includes(props.filter.toLowerCase()) 
+        }
+        setCarList(Newlist)
+    }
+    function handleSendDatatoApi(response){
+        setGeneratedList({
+            'data':response.data,
+            'goToBuy': false
+        })
+        toggleModal()
+    }
+    useMemo( ()=>{
+        let currentList = []
+        if(generatedList.goToBuy){
+            currentList = generatedList.data.list
+        }else{
+            currentList = props.api
+        }
+        const products = currentList.filter(product=>{
+            //Si no está comprando
+            if(!generatedList.goToBuy){
+                for (let index = 0; index < carList.length; index++) {
+                    const element = carList[index];
+                    if(product.id===element.id){
+                        product.quantity = element.quantity
+                    }
+                }
+            }
+            return product.name.toLowerCase().includes(filter.toLowerCase()) 
         });
         setFilteredProducts(products)
-    }, [props.api.data, props.filter, props.carList])
+    }, [props.api, carList, filter, generatedList])
 
-    //                          CUSTOM HOOK
+    useEffect(()=>{
+        let carListClone = [...carList]
+        let reload = false
+        for (let index = 0; index < carListClone.length; index++) {
+            const element = carListClone[index];
+            if(element.quantity === 0){
+                carListClone.splice(index, 1)
+                reload = true
+            }
+        }
+        if(reload){
+            setCarList(carListClone)
+        }
+    },[carList])
+
+    useEffect(()=>{
+        setFilteredProducts(props.api)
+    },[props.api])
     return (
+        <Fragment>
+            <PlusBtn className={ (carList.length >= 1) ? 'visible' : 'invisible'}>
+                <button className="btn btn-primary"
+                onClick={async ()=>{
+                    generateList(carList,handleSendDatatoApi)
+                }}>Generate List !</button>
+            </PlusBtn>
+            <SearchInput type="text"
+                value={filter}
+                onChange={e=>{
+                    setFilter(e.target.value)
+                }}/>
         <List>
-        {   
-            
-            props.api.loading ? 
-            <h1>Cargando...</h1>
-            : 
-            
+        {
+            filteredProducts.length ? 
             filteredProducts.map(product =>{
                 return(
-                    <Item key={product.id} >
+                    <Item key={"product-"+product.id} >
                         <Product
+                        buying={generatedList.goToBuy}
                         {...product}
-                        handleRemoveProduct
-                        handleAddProduct={props.handleAddProduct}
-                        handleRemoveProduct={props.handleRemoveProduct} />
+                        handleAddProduct={handleAddProduct}
+                        handleRemoveProduct={handleRemoveProduct} />
                     </Item> 
                 )
-            })
+            }) : null
         }
         </List>
+        {
+                (modalVisible && !generatedList.goToBuy) &&
+                <Modal   
+                toggleModal={toggleModal}
+                generatedList={generatedList.data}
+                setGeneratedList={setGeneratedList}
+                />
+            }
+        </Fragment> 
     );
+    
 }

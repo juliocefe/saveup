@@ -8,11 +8,15 @@ export const Container = styled.div`
     margin: 5px;
     height: 100vh;
     background-color: #F9F9F9;
+    padding: 0 1.2rem;
 
+    & h1 {
+        text-align:center;
+    }
 `
 
 export const LoginBox = styled.div` 
-    padding: 20px 50px;
+    padding: 20px 1rem;
     max-width: 700px;
     width: 500px;
     background-color: #fff;

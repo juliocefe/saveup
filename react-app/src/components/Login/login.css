@@ -1,4 +1,5 @@
 .main {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,6 +10,7 @@
 }
 
 .login-container {
+    overflow: hidden;
     padding: 20px 50px;
     max-width: 700px;
     width: 500px;
@@ -29,7 +31,7 @@
 
 @media screen and (max-width: 800px) {
     .login-container {
-        padding: 20px 20px; 
+        padding: 20px 5.5rem; 
         border: none;
     }
 }

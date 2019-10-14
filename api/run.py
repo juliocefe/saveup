@@ -12,13 +12,13 @@ app = create_app()
 #Create database conection object
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
-manager.add_command("runserver", Server(port=5000, threaded=True))
+manager.add_command("runserver", Server(port=5000, threaded=True, host='0.0.0.0'))
 
 #Dejar de usar esta librearía y usar la offical de flask
 # https://flask.palletsprojects.com/en/1.1.x/cli/
 @manager.command
 def test():
-    tests = unittest.TestLoader().discover('app/tests')
+    tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner().run(tests)
 
 if __name__ == "__main__":

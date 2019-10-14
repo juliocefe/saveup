@@ -27,7 +27,8 @@ export const SecondSection = styled.div`
         font-weight: bold;
     }
     .brand {
-        color: green;
+        margin: 0;
+
     }
 
     .product-counter {
@@ -59,3 +60,21 @@ export const SecondSection = styled.div`
 }
 `
 
+
+export const CheckBoxIcon = styled.button`
+    position: absolute;
+    right: 1rem;
+    bottom: 3px;
+    outline: 0 !important;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    background:transparent;
+    & i {
+        font-size: 30px;
+        color: gray;
+    }
+    :focus {
+    }
+`

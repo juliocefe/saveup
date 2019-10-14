@@ -5,7 +5,8 @@ import logo from './../../images/money-bag.svg'
 
 import { Logo } from './../Logo/index'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {  Link } from '@reach/router'
+
 class Login extends React.Component {
     render(){
         return(
@@ -34,7 +35,7 @@ class Login extends React.Component {
                         <p className="mt-4 d-inline mr-2">
                             No tienes una cuenta Aún?
                         </p>
-                        <a href="#">Registrate aquí.</a>
+                        <Link to="newUser">Registrate aquí.</Link>
                         
                     </form>
                 </div>

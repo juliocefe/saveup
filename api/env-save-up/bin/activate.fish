@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/juliocesarfelixabril/Desktop/platzi-badges-master/api/env-save-up"
+set -gx VIRTUAL_ENV "/Users/juliocesarfelixabril/development/save-up/api/save-up/api/env-save-up"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/juliocesarfelixabril/Desktop/platzi-badges-master/api/env-save-up"
+VIRTUAL_ENV="/Users/juliocesarfelixabril/development/save-up/api/save-up/api/env-save-up"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

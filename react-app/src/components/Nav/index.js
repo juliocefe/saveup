@@ -1,7 +1,8 @@
 import React from 'react'
-import { directive } from '@babel/types'
+import { Link } from "@reach/router";
 
 import './menu.css'
+
 
 
 class Nav extends React.Component {
@@ -16,12 +17,12 @@ class Nav extends React.Component {
             <div className="menu-desktop">
                 <div className="leftSide">
                     <h1>SaveUp</h1>
-                    <a>Listas</a>
-                    <a>productos</a>
+                    <Link className='link' to='#'>Listas</Link>
+                    <Link className='link' to='search'>productos</Link>
                 </div>
                 <div className="rightSide">
-                    <a >juliocefe</a>
-                    <a>logout</a>
+                    <Link className='link' to='defualt'>juliocefe</Link>
+                    <Link className='link' to='#'>logout</Link>
                 </div>
             </div>
         </nav>

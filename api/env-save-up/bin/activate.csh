@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/Users/juliocesarfelixabril/Desktop/platzi-badges-master/api/env-save-up"
+setenv VIRTUAL_ENV "/Users/juliocesarfelixabril/development/save-up/api/save-up/api/env-save-up"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"
