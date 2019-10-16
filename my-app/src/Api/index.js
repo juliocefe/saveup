@@ -1,6 +1,9 @@
 function fecthApi(setProductsList){
     fetch("/products/products",{
         method: 'get',
+        headers: new Headers({
+          "x-access-token": window.sessionStorage.getItem('token')
+      })
     }).then(
             function(response) {  
               if (response.status !== 200) {
@@ -26,7 +29,8 @@ async function generateList(carList, toDo){
             credentials: "same-origin",
             body: JSON.stringify(productToRequest),
             headers: new Headers({
-                "content-type": "application/json"
+                "content-type": "application/json",
+                "x-access-token": window.sessionStorage.getItem('token')
             })
         }).then(
                 function(response) {  

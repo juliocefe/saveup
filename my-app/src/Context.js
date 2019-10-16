@@ -1,26 +1,26 @@
-import  React, { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 const Context = createContext()
 
-
 const Provider = ({ children }) => {
-    const  [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(()=>{
+    return window.sessionStorage.getItem('token')
+  })
 
-    const value = {
-        isAuth,
-        activateAuth: ()=>{
-            setIsAuth(true)
-        }
+  const value = {
+    isAuth,
+    activateAuth: () => {
+      setIsAuth(true)
     }
-    
-    
-    return (
-        <Context.Provider value={value}>
-            {children}       
-        </Context.Provider>
-    )
+  }
+
+  return (
+    <Context.Provider value={value}>
+      {children}
+    </Context.Provider>
+  )
 }
 
 export default {
-    Provider,
-    Consumer: Context.Consumer
+  Provider,
+  Consumer: Context.Consumer
 }

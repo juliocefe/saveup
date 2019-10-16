@@ -3,8 +3,6 @@ import { Link } from "@reach/router";
 
 import './menu.css'
 
-
-
 class Nav extends React.Component {
     render() {
         return (
