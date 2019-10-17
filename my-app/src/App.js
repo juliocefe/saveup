@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Router } from '@reach/router'
 
@@ -7,31 +7,32 @@ import { Login } from './components/Login/login.js';
 import { Search }  from './components/Search'
 import { GlobalStyle } from './styles/GlobalStyles'
 import { NewUser } from './components/NewUser'
-import Context  from './Context'
+import { Dashboard } from './components/Dashboard'
+import { Context }  from './Context'
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'animate.css/animate.min.css';
 
 function App() {
+  const { isAuth } = useContext(Context)
   return (
     <div>
       <GlobalStyle />
-      <Context.Consumer>
         {
-          ({ isAuth }) =>
-            isAuth
-              ? <div>
-                <Nav/>
-                <Router>
-                  <Search path='search'/>
-                  <NewUser path='newUser'/>
-                </Router>
-              </div>
-              : <Router>
-                  <Login default/>
-              </Router>
+          isAuth
+          ? <div>
+            <Nav/>
+            <Router>
+              <Dashboard default path='dashboard'/>
+              <Search path='search'/>
+            </Router>
+          </div>
+          : <Router>
+              <Login default/>
+              <NewUser path='newUser'/>
+          </Router>
         }
-      </Context.Consumer>
     </div>
   );
 }

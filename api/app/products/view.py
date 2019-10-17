@@ -22,7 +22,7 @@ def register_products():
 
 @products.route('/products')
 @token_required
-def get_products():
+def get_products(current_user):
     products = Products.query.all()
     response = []
     for product in products:

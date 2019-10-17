@@ -14,7 +14,6 @@ export const Product = (
     //  Que fea está esta funcion Atte YO
     function handleToggleCheckBox(id){
       var checkBox = document.getElementById(id)
-      console.log(checkBox.value==="0", checkBox.value)
         if(checkBox.value==="0"){
           checkBox.value=1
           checkBox.children[0].style.color = 'white'

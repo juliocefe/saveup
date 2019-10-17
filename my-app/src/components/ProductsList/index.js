@@ -34,16 +34,12 @@ export const ProductsList = ( props ) => {
         if(isNew) Newlist.push( { id:id, quantity: 1 } )
         setCarList(Newlist)
     }
-    console.log('renderisando HIJO')
     function handleRemoveProduct(id){
         let Newlist = [...carList]
         for (let index = 0; index < Newlist.length; index++) {
             const element = Newlist[index];
             if(element.id===id){
                 Newlist[index].quantity =  Newlist[index].quantity -1
-                // if(Newlist[index].quantity <= 0 ){
-                //     Newlist.splice(index,1)
-                // }
                 break
             }
         }
@@ -99,10 +95,20 @@ export const ProductsList = ( props ) => {
     return (
         <Fragment>
             <PlusBtn className={ (carList.length >= 1) ? 'visible' : 'invisible'}>
-                <button className="btn btn-primary"
-                onClick={async ()=>{
-                    generateList(carList,handleSendDatatoApi)
-                }}>Generate List !</button>
+                {
+                    generatedList.goToBuy ?
+                    <button 
+                    className="btn btn-danger btn-sm visible rojito">
+                    <a target='_blank' rel="noopener" href="https://www.google.com/maps/search/?api=1&query=29.098370919338887,-110.9259108756669">Go to Ley kino</a></button>
+                    :
+                    <Fragment>
+                        <button className="btn btn-sm invisible">Go to Ley kino</button>
+                        <button className="btn btn-primary"
+                        onClick={async ()=>{
+                            generateList(carList,handleSendDatatoApi)
+                        }}>Generate List !</button>
+                    </Fragment>
+                }
             </PlusBtn>
             <SearchInput type="text"
                 value={filter}

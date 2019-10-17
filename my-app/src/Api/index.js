@@ -1,3 +1,15 @@
+function validationResponse(response){
+  response.json().then(data => {
+    if(data.message==='Token is invalid!'){
+      window.sessionStorage.removeItem('token')
+      window.location.href = '/'
+    }
+  });
+  console.log('Looks like there was a problem. Status Code: ' + response);
+  return;
+}
+
+
 function fecthApi(setProductsList){
     fetch("/products/products",{
         method: 'get',
@@ -7,8 +19,7 @@ function fecthApi(setProductsList){
     }).then(
             function(response) {  
               if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
-                  response);
+                validationResponse(response)
                 return;
               }
               // Examine the text in the response

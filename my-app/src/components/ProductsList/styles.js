@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const List = styled.ul`
     display: flex;
@@ -42,14 +42,18 @@ export const Item = styled.li`
     }
 
 `
+const animationBtn = keyframes`
+  0%   { background: red; color:white}
+  100% { background: transparent; color:red;}
+`
 
 export const PlusBtn = styled.div`
    margin-top: 3.5rem;
    margin-bottom: 1rem;
    display: flex;
    visibility: visible;
-   justify-content:flex-end;
-   align-items:flex-end;
+   justify-content: space-between;
+   align-items: center;
    & button{
        padding: 5px 1rem;
        font-size: 1.2rem;
@@ -57,7 +61,18 @@ export const PlusBtn = styled.div`
        border-radius: .30rem;
        border: none;
        display:block;
+       
    }
+   & .rojito{
+    & a{
+        text-decoration: inherit; color: inherit; cursor: auto; 
+    }
+    animation: ${animationBtn} 4s  infinite;
+    font-size: 12px;
+    color: black;
+   }
+
+   
 `
 
 export const SearchInput = styled.input`

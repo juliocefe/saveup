@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { createPortal } from 'react-dom';
 
 import { ModalStyle, ButtonSelect } from './styles'
+import 'animate.css/animate.min.css';
 
 export const Modal = (props) => {
         const [ listToSelect, setListToSelect ] = useState()
         return(
             createPortal(
                 <ModalStyle className="animated bounceInDown" id="myModalDeleter">
-                    {console.log('modal', props)}
                     <div>
                         <h1>Listas generadas</h1>
                         <div  className="listasGeneradas">

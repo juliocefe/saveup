@@ -2,9 +2,9 @@ import React from 'react'
 
 export const LogoMini = props => (
   <svg
-    width={264.927}
-    height={99.22}
-    viewBox="117.536 25.39 264.927 99.22"
+    width={304.927}
+    height={139.22}
+    viewBox="117.536 15.39 264.927 99.22"
     style={{
       background: '0 0',
     }}

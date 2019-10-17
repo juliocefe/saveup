@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-const Context = createContext()
+export const Context = createContext()
 
 const Provider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(()=>{
@@ -8,8 +8,15 @@ const Provider = ({ children }) => {
 
   const value = {
     isAuth,
-    activateAuth: () => {
+    activateAuth: ({token, username}) => {
+      window.sessionStorage.setItem('token',token)
+      window.sessionStorage.setItem('username',username)
       setIsAuth(true)
+    },
+    logOut: ()=>{
+      window.sessionStorage.removeItem('token')
+      window.sessionStorage.removeItem('username')
+      window.location.href = '/'
     }
   }
 
