@@ -6,5 +6,6 @@ as opposed to the localhost database URI used for development.
 """
 
 DEBUG = False
-SECRET_KEY = 'L4v4c4_d3_ju4n_n0_d4_l3ch3_p0r_l4s_m4ñ4n45.'
+SECRET_KEY = 'Very secret'
 SQLALCHEMY_DATABASE_URI = ""
+ENV='production'

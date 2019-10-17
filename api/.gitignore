@@ -1,3 +1,4 @@
 /env-save-up
 /instance
 /__pycache__
+*.pyc

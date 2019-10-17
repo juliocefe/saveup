@@ -5,7 +5,7 @@ Here you might specify the URI of a database sitting on localhost.
 """
 
 DEBUG = True
-SECRET_KEY = 'la vaca de juan no da leche.'
+SECRET_KEY = 'secret'
 SQLALCHEMY_DATABASE_URI = ""
 
 
