@@ -16,7 +16,7 @@ export const Login = () => {
         event.preventDefault()
         fetch("/auth/login",{
             method: 'POST',
-            body: JSON.stringify({username: "juliocefe", password:123}),
+            body: JSON.stringify({username: username.value, password: password.value}),
             headers: new Headers({
                 "content-type": "application/json",
                 // El metodo login de la API me pide una atorizaicón tipo básica
