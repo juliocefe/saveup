@@ -1,20 +1,20 @@
 import React, { useEffect, useState} from 'react';
-import { ProductsList } from './../ProductsList'
+import { ProductsList } from './../ProductsList';
 
-
-import { SearchContainer } from  './styles'
-const { fecthApi } = require( './../../Api');
+import { SearchContainer } from  './styles';
+import { GetProducts } from './../../Api/index';
 
 export const Search = () => {
     const [ productsList, setProductsList ] = useState({'data': [],'loading': true})
     useEffect(()=>{
-        fecthApi(setProductsList)
+        GetProducts(setProductsList)
         return () => {
             // clearTimeout(time)
         }
     }, [])
     return(
         <SearchContainer>
+        {console.log(productsList.data)}
             {
                 productsList.loading ? 
                  <h1>Cargando...</h1>

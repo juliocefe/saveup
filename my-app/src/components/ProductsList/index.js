@@ -1,11 +1,11 @@
-import React, { useState, useMemo, useEffect, Fragment} from 'react'
-import { Product } from '../Product'
+import React, { useState, useMemo, useEffect, Fragment} from 'react';
+import { Product } from '../Product';
 
-import { List, Item } from  './styles'
-import { SearchInput, PlusBtn } from  './styles'
+import { List, Item } from  './styles';
+import { SearchInput, PlusBtn } from  './styles';
 
-import { Modal } from './../../Modal'
-const { generateList } = require( './../../Api');
+import { Modal } from './../../Modal';
+import { generateList } from './../../Api/index';
 
 export const ProductsList = ( props ) => {
     const [ filter, setFilter ] = useState('')
