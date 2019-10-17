@@ -1,4 +1,4 @@
-from flask import Flask, session, g, redirect, url_for, request, make_response, jsonify
+from flask import Flask, session, g, redirect, url_for, request, make_response, jsonify, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_cors import CORS
@@ -7,6 +7,7 @@ import datetime
 from functools import wraps
 import jwt
 import uuid
+import os
 
 # ESTO NO SE SI SEA LO MEJOR PERO ME FUNCIONA
 # Cree esta variables globales para que no truene mi aplicación, esto resuelve 
@@ -19,7 +20,9 @@ db = SQLAlchemy()
 
 def create_app(test_config=None):
     # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__, 
+            instance_relative_config=True,
+            static_folder= './templates/build/static')
     # Enable CORS
     CORS(app)
     if test_config is None:
@@ -72,44 +75,17 @@ def create_app(test_config=None):
     from app.products import products
     app.register_blueprint(products)
 
-    @app.route('/')
-    def index():
-        #A ESTO HAY QUE DARLE OTRO USO QUEDA PENDIENTEEE
-        return jsonify('que rollo')
+    # Serve React App
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def serve(path):
+        if session:
+            if path != "" and os.path.exists("./templates/build/" + path):
+                return send_from_directory('./templates/build', path)
+            else:
+                return send_from_directory('./templates/build', 'index.html')
+        else:
+            return send_from_directory('./templates/build/', 'index.html')
+
 
     return app
-
-
-
-
-
-
-
-
-    # @app.after_request
-    # def add_header(response):
-    #     """
-    #     Add headers to both force latest IE rendering engine or Chrome Frame,
-    #     and also to cache the rendered page for 10 minutes.
-    #     """
-    #     response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
-    #     response.headers['Cache-Control'] = 'public, max-age=0'
-    #     return response
-
-
-    # ESTO NO SE ME DA MUCHA CONFIANZA
-    # print("UsersFake y Users son el mismo",UsersFake is Users, UsersFake, Users)
-    # @app.before_request
-    # def before_request():
-    #     if "idUser" in session:
-    #         g.id_user = session["idUser"]
-    #         users = Users.query.filter_by(id__user=g.id_user).first()
-    #         if users is None:
-    #             session.pop("username")
-    #             return 
-    #         g.username = users.username__user
-    #         g.role_user = users.role_user
-    #     else:
-    #         g.username = None
-    #         g.id_user = None
-    #         g.role_user = None
