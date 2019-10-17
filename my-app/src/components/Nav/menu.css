@@ -1,0 +1,141 @@
+
+.menu-container {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    display: block;
+    background-color: #20232a;
+    padding: 0 10px;
+    font-family: sans-serif;
+    z-index: 100;
+}
+
+.menu-container .menu-desktop{
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #20232a;
+}
+
+.leftSide , .rightSide {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftSide > * , .rightSide > * {
+    margin: 8px 10px 8px 0;
+    padding: 5px;
+}
+
+ .menu-desktop .leftSide .header{
+    text-decoration: inherit; 
+    cursor: auto;
+    position: relative;
+    color: green;
+    font-family: 'Rockwell';
+    font-weight: bold;
+    font-size: 28px;
+    top: 4px; 
+}
+
+.menu-container .menu-desktop .link{
+    font-size: 20px;
+    color: white !important;
+    text-decoration: none;
+
+}
+
+
+
+.menu-movile{
+    /* background-color: #20232a;
+    width: 100%;
+    height: 8vh;
+    padding: 0 5px;
+    display: none; */
+}
+
+
+
+.menu-movile button {
+    display: none;
+    margin: 4px 0;
+	font-size: 25px;
+	color: #fff;
+	padding: 0 10px;
+	border: 1px solid transparent;
+	cursor: pointer;
+    background: none;
+}
+.menu-movile button:focus{
+    outline: 1px solid rgba(223, 224, 224, 0.6) !important;
+}
+
+@media screen and (max-width: 800px) {
+    body{
+        /* overflow: hidden; */
+    }
+    
+    .menu-movile button {
+        display: inline-block;
+    }
+    
+    .menu-movile{
+        display: flex;
+        height: 100%;
+        align-items: center;
+    }
+
+    .menu-container {
+        width: 100%;
+        height: 3.2rem;
+        padding: 0 5px;
+    }
+
+    .menu-container .menu-desktop {
+        height: calc(100vh - 3.2rem);
+        width: 60%;
+        left: 0;
+        position: fixed;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+		transition: .3s ease all;
+        transform: translate(-100%);
+    }
+
+    .menu-desktop.active {
+        transition: .3s ease all;
+        transform: translate(0%)
+    }
+
+    .menu-desktop .leftSide{
+        width: 100%;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin: 10px 0 0 0; 
+        flex-direction: column;
+    }
+
+    .menu-desktop .rightSide{
+        width: 100%;
+        border-top: 1px solid rgba(223, 224, 224, 0.6);
+        align-items: flex-start;
+        margin: 10px 0 10px 0;
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .menu-desktop .leftSide > * {
+        margin: 0 0 10px 0  !important;
+    }
+    
+    .menu-desktop .rightSide > *{
+        margin-bottom: 10px;
+    }
+
+
+}
