@@ -3,7 +3,7 @@ from app.models import (
                         Lists, ListDetails, 
                         Users, BranchOffices, 
                         ProductDetails, Products,
-                        DateNow )
+                        SuperMarkets,DateNow )
 from . import lists
 
 
@@ -29,6 +29,7 @@ def generate_list():
     results = query.all()
     listofCompanies = []
     for productDetail, product, company in results:
+
         dic = {
             'idDetail': productDetail.id_product__details,
             'idProduct': product.id__product,  
@@ -52,7 +53,15 @@ def generate_list():
                 found = True
                 break
         if not found:
+            url = None
+            if company.id__branch_office == 1:
+                url = 'https://www.google.com/maps/search/?api=1&query=29.09688382734498,-110.9491963684559'
+            elif company.id__branch_office == 2:
+                url = 'https://www.google.com/maps/search/?api=1&query=29.098370919338887,-110.9259108756669'
+            elif company.id__branch_office == 3:
+                url = 'https://www.google.com/maps/place/Soriana+H%C3%ADper+Bachoco/@29.1237515,-110.9540982,17z/data=!3m1!4b1!4m5!3m4!1s0x86ce8689eb485d45:0x92868366aca70280!8m2!3d29.1237515!4d-110.9519095'
             listofCompanies.append({
+                'url': url,
                 'idCompany':company.id__branch_office,
                 'company': company.name__branch_office,
                 'list': [ dic ],
