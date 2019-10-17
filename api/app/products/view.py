@@ -23,6 +23,7 @@ def register_products():
 @products.route('/products')
 @token_required
 def get_products(current_user):
+    # current user probablemente lo vayamos a usar después para validar roles
     products = Products.query.all()
     response = []
     for product in products:
