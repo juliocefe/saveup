@@ -29,7 +29,7 @@ function App() {
             </Router>
           </div>
           : <Router>
-              <Login default/>
+              <Login default path='login'/>
               <NewUser path='newUser'/>
           </Router>
         }

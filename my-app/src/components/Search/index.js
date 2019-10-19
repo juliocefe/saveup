@@ -14,7 +14,6 @@ export const Search = () => {
     }, [])
     return(
         <SearchContainer>
-        {console.log(productsList.data)}
             {
                 productsList.loading ? 
                  <h1>Cargando...</h1>

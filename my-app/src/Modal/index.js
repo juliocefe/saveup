@@ -5,7 +5,7 @@ import { ModalStyle, ButtonSelect } from './styles'
 import 'animate.css/animate.min.css';
 
 export const Modal = (props) => {
-        const [ listToSelect, setListToSelect ] = useState()
+        const [ listToSelect, setListToSelect ] = useState(false)
         return(
             createPortal(
                 <ModalStyle className="animated bounceInDown" id="myModalDeleter">
@@ -35,7 +35,8 @@ export const Modal = (props) => {
                                         goToBuy: true
                                     })
                                 }}
-                                className="btn btn-success">Seleccionar</button>
+                                className="btn btn-success"
+                                 disabled={listToSelect===false}>Seleccionar</button>
                         </ButtonSelect>
 
                     </div>

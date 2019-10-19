@@ -7,6 +7,8 @@ import {  Link } from '@reach/router'
 import { useInputValue } from './../../hooks/useInputValue'
 import { Context } from './../../Context'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 export const Login = () => {
     const { activateAuth }  = useContext(Context)
     const username = useInputValue('')
@@ -54,7 +56,7 @@ export const Login = () => {
                         <p className="mt-4 d-inline mr-2">
                             No tienes una cuenta Aún?
                         </p>
-                        <Link to="newUser">Registrate aquí.</Link>
+                        <Link style={{ color:'blue' }} to="/newUser">Registrate aquí.</Link>
                     </form>
                 </div>
             </div>

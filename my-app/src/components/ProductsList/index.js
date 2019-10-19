@@ -99,14 +99,14 @@ export const ProductsList = ( props ) => {
                     generatedList.goToBuy ?
                     <button 
                     className="btn btn-danger btn-sm visible rojito">
-                    <a target='_blank' rel="noopener" href="https://www.google.com/maps/search/?api=1&query=29.098370919338887,-110.9259108756669">Go to Ley kino</a></button>
+                    <a target='_blank' rel="noopener" href="https://www.google.com/maps/search/?api=1&query=29.098370919338887,-110.9259108756669">Ir a Super del Norte</a></button>
                     :
                     <Fragment>
-                        <button className="btn btn-sm invisible">Go to Ley kino</button>
-                        <button className="btn btn-primary"
+                        <button className="btn btn-sm invisible">Ir a Super del Norte</button>
+                        <button style={{ fontSize:'1rem' }} className="btn btn-primary"
                         onClick={async ()=>{
                             generateList(carList,handleSendDatatoApi)
-                        }}>Generate List !</button>
+                        }}>Generar Lista!</button>
                     </Fragment>
                 }
             </PlusBtn>

@@ -1,11 +1,20 @@
-import React, {useEffect, useContext} from 'react'
-import { Link } from "@reach/router";
+import React, {useEffect, useContext , useState } from 'react'
+import { Link, navigate } from "@reach/router";
 import { Context } from './../../Context'
 
 import './menu.css'
 
 export const Nav = ()=> {
-    const { logOut }= useContext(Context)
+    const { logOut, history }= useContext(Context)
+
+    const handleNavigate = route=>e=>{
+        e.preventDefault()
+        document.querySelector('.menu-desktop').classList.remove('active')
+        setTimeout(() => {
+            navigate(route)
+        }, 315);
+    }
+    console.log('RENDEREING NAV')
     useEffect(()=> {
     document.querySelector('.menu-movile button').addEventListener('click', e=>{
         e.preventDefault()
@@ -16,6 +25,7 @@ export const Nav = ()=> {
             menu.classList.add('active')
         })
     },[])
+    
     return <nav className="menu-container" id="menu-container">
                 <div className="menu-movile">
                     <button>
@@ -24,9 +34,9 @@ export const Nav = ()=> {
                 </div>
                 <div className="menu-desktop">
                     <div className="leftSide">
-                        <Link className="header" to='dashboard'>SaveUp</Link>
-                        <Link onClick={e => e.preventDefault()} className='link disable' to='#'>Listas</Link>
-                        <Link className='link' to='search'>productos</Link>
+                        <Link className="header" to='' onClick={handleNavigate('/dashboard')}>SaveUp</Link>
+                        <Link  to='' className='link disable'>Favoritos</Link>
+                        <Link to='' onClick={handleNavigate('/search')} className='link'>productos</Link>
                     </div>
                     <div className="rightSide">
                         <Link onClick={e => e.preventDefault()} className='link' to='defualt'>{ window.sessionStorage.getItem('username') }</Link>
