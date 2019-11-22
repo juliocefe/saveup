@@ -12,7 +12,7 @@ app = create_app()
 #Create database conection object
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
-manager.add_command("runserver", Server(port=5000, threaded=True, host='0.0.0.0'))
+manager.add_command("runserver", Server(port=8080, threaded=True, host='0.0.0.0'))
 
 #Dejar de usar esta librearía y usar la offical de flask
 # https://flask.palletsprojects.com/en/1.1.x/cli/

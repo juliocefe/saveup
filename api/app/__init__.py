@@ -19,7 +19,8 @@ db = SQLAlchemy()
 
 def create_app(test_config=None):
     # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__, instance_relative_config=True,
+                static_folder= './templates/build/static')
     # Enable CORS
     CORS(app)
     if test_config is None:
@@ -72,10 +73,17 @@ def create_app(test_config=None):
     from app.products import products
     app.register_blueprint(products)
 
-    @app.route('/')
-    def index():
-        #A ESTO HAY QUE DARLE OTRO USO QUEDA PENDIENTEEE
-        return jsonify('que rollo')
+    # Serve React App
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def serve(path):
+        if session:
+            if path != "" and os.path.exists("./templates/build/" + path):
+                return send_from_directory('./templates/build', path)
+            else:
+                return send_from_directory('./templates/build', 'index.html')
+        else:
+            return send_from_directory('./templates/build/', 'index.html')
 
     return app
 
