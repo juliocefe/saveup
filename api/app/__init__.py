@@ -1,6 +1,6 @@
 from flask import Flask, session, g, redirect, url_for, request, make_response, jsonify, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate, MigrateCommand
+from flask_migrate import Migrate
 from flask_cors import CORS
 import unittest
 import datetime
@@ -12,7 +12,7 @@ import os
 # ESTO NO SE SI SEA LO MEJOR PERO ME FUNCIONA
 # Cree esta variables globales para que no truene mi aplicación, esto resuelve 
 # un problema de flujo de la app, ya que los blueprints son importados antes que todo(cuando creamos la app,
-# en la funcón create_app) no se puede importar antes enlos blue prints blueprints algo que estás creando después.
+# en la funcón create_app) no se puede importar antes en los blue prints blueprints algo que estás creando después.
 #  NO PUEDES TENER IMPORTADO NADA QUE SEA CREA DESPUES, POR ESO IMPORTO ALGO Null que después tomará una valor 0.0
 token_required = None
 
