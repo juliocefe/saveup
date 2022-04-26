@@ -1,7 +1,13 @@
 from app import db
-from sqlalchemy  import Integer, BigInteger, Float, String, \
-Text, DateTime, Boolean, Enum, Column, ForeignKey, LargeBinary, Float, DECIMAL, Enum
-from sqlalchemy.dialects.mysql import LONGTEXT, DOUBLE
+from sqlalchemy  import (
+    Integer, 
+    Float, 
+    String, 
+    DateTime, 
+    Enum, 
+    Float
+)
+from sqlalchemy.dialects.postgresql import TEXT
 
 import datetime
 from pytz import timezone
@@ -24,7 +30,10 @@ class Users(db.Model):
     name__user = db.Column(String(50), nullable=False)
     lastname__user = db.Column(String(50), nullable=False)
     password__user = db.Column(String(250), nullable=False)
-    role__user = db.Column(Enum('User', 'Administrator'), nullable=False, default='User')
+    role__user = db.Column(
+        type_=Enum('User', 'Administrator', name="user_role"), 
+        nullable=False, default='User'
+    )
     email__user = db.Column(String(30), nullable=True)
     phone_number__user = db.Column(String(20), nullable=False)
     lists = db.relationship('Lists', backref='user', lazy=True)
@@ -50,7 +59,7 @@ class Products(db.Model):
     name__product = db.Column(String(50), nullable=False)
     brand__product = db.Column(String(50), nullable=False)
     unit__product = db.Column(String(50), nullable=False)
-    image__product = db.Column(LONGTEXT, nullable=True)
+    image__product = db.Column(TEXT, nullable=True)
     productDetails = db.relationship('ProductDetails', backref='products', lazy=True)
 
 class ProductDetails(db.Model):
