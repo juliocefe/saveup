@@ -45,7 +45,7 @@ def new_user():
             return jsonify(
                 {
                     "message":"The user has beeen registered successfully.", 
-                    "token":token.decode('UTF-8'),
+                    "token": token,
                     "username": new_user.username__user
                 }
                 ), 201
