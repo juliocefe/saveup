@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react";
 
-export const Logo = props => (
+export const Logo = (props) => (
   <svg
     width={362.337}
     height={138.83}
     viewBox="68.831 5.585 362.337 138.83"
     style={{
-      background: '0 0',
+      background: "0 0",
     }}
     preserveAspectRatio="xMidYMid"
     {...props}
@@ -111,4 +111,4 @@ export const Logo = props => (
     </g>
     <style />
   </svg>
-)
+);

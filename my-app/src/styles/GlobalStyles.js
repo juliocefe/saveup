@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     background: #fefefe;
     height: 100vh;
     margin: 0 auto;
-    ${'' /* max-width: 500px; */}
+    ${"" /* max-width: 500px; */}
     overscroll-behavior: none;
     width: 100%; 
   }
@@ -30,4 +30,4 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     padding-bottom: 10px;
   }
-`
+`;

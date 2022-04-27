@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react";
 
-export const LogoMini = props => (
+export const LogoMini = (props) => (
   <svg
     width={304.927}
     height={139.22}
     viewBox="117.536 15.39 264.927 99.22"
     style={{
-      background: '0 0',
+      background: "0 0",
     }}
     preserveAspectRatio="xMidYMid"
     {...props}
@@ -111,4 +111,4 @@ export const LogoMini = props => (
     </g>
     <style />
   </svg>
-)
+);
