@@ -87,5 +87,4 @@ def create_app(test_config=None):
         else:
             return send_from_directory('./templates/build/', 'index.html')
 
-
     return app
