@@ -21,12 +21,13 @@ RUN pip install --upgrade pip
 # Requirements are installed here to ensure they will be cached.
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-COPY . /app
+COPY . .
 
-RUN sed -i 's/\r$//g' start
-RUN chmod +x start
+COPY compose/local/flask/start /start
+RUN sed -i 's/\r$//g' /start
+RUN chmod +x /start
 
 ENV FLASK_APP run
 ENV FLASK_ENV development
 
-ENTRYPOINT [ "/app/start" ]
+CMD [ "/start" ]
