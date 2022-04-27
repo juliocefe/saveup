@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 import os
+from datetime import timedelta
 
 # ESTO NO SE SI SEA LO MEJOR PERO ME FUNCIONA
 # Cree esta variables globales para que no truene mi aplicación, esto resuelve 
@@ -27,8 +28,6 @@ def create_app(test_config=None):
         app.config.from_object('config.default')
         # Load the development configuration
         app.config.from_object('config.development')
-        # Load the configuration from the instance folder and will overwrite the previous configurations
-        app.config.from_pyfile('config.py')
     else:
         #Esto es interesante investigar más si tienes tiempo
         # load the test config if passed in

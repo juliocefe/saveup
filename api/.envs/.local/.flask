@@ -1,0 +1,5 @@
+# flask
+# ------------------------------------------------------------------------------
+SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://iCYgcKdYey9ZncmB2nKw823cJ7rs:RBd299CFYGF4U9vbPFnrG2LXdQTfwiQDeav@postgres/save_up
+SECRET_KEY=very_secreto.
+JWT_ACCESS_TOKEN_EXPIRES=30

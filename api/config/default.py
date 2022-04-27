@@ -7,3 +7,4 @@ An example might be setting DEBUG = False in config/default.py and DEBUG = True 
 
 DEBUG = False
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+TESTING=False

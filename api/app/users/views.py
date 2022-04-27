@@ -5,7 +5,10 @@ from flask import (
 )
 from werkzeug.security import generate_password_hash
 from app import db
-from app.models import Users, DateNow
+from app.models import Users
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 import jwt
 import datetime
 from . import users
@@ -37,13 +40,7 @@ def new_user():
             db.session.add(new_user)
             db.session.commit()
 
-            token = jwt.encode(
-                {
-                    'id' : new_user.id__user, 
-                    'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
-                }, 
-                current_app.config['SECRET_KEY']
-            )
+            token = create_access_token(identity=new_user.id__user)
 
             return jsonify(
                 {
@@ -92,15 +89,19 @@ def delete_user(id):
     return jsonify("The user has been deleted successfully!."), 200
 
 
-@users.route('/users')
-def render_users(current_user):
+@users.route('/')
+@jwt_required()
+def render_users():
     # current user probablemente lo vayamos a usar después para validar roles
-    users = Users.query.all()
-    userList = []
-    for user in users:
-        dic = {
+    users_db = Users.query.all()
+    users = []
+    for user in users_db:
+        user_d = {
             'username': user.username__user
         }
-        userList.append(dic)
+        users.append(user_d)
 
-    return jsonify(userList)
+    return jsonify({
+        "current_user": get_jwt_identity(),
+        "users": users
+    })
