@@ -3,11 +3,11 @@ from flask import (
     Blueprint, session, g, 
     request, render_template, redirect, url_for, jsonify,make_response, current_app )
 from werkzeug.security import generate_password_hash, check_password_hash
-
 from app.models import Users
 from . import auth
 import datetime
 import jwt 
+
 
 @auth.route('/logout')
 def logout():
@@ -18,10 +18,11 @@ def logout():
         g.role_user = None
     return redirect(url_for('auth.login'))
 
+
 @auth.route('/login', methods=['POST'])
 def login():
     auth = request.authorization
-
+    
     if not auth or not auth.username or not auth.password:
         return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
 
