@@ -1,6 +1,8 @@
 #!/bin/bash
 
-flask db init
-flask db migrate -m "Initial migration."
+set -o errexit
+set -o pipefail
+set -o nounset
+
 flask db upgrade
 flask run -h flask -p 5000 --reload
