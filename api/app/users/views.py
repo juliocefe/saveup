@@ -1,58 +1,62 @@
-from flask import (request, 
-        render_template, url_for, 
-        g, flash, redirect, session, jsonify, make_response, current_app )
+from flask import (
+    request,
+    jsonify,
+    current_app
+)
 from werkzeug.security import generate_password_hash
-
 from app import db
 from app.models import Users, DateNow
 import jwt
 import datetime
-
 from . import users
-from app import token_required
+
 
 @users.route('/newUser', methods=['GET','POST'])
 def new_user():
-    auth = request.authorization
-    if not auth or not auth.username or not auth.password:
-        return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
-
     if request.method == 'POST':
-        jsonRequest = request.get_json()
-        username = jsonRequest['username']
+        username = request.json.get("username", None)
+        password1 = request.json.get("password1", None)
+        password2 = request.json.get("password2", None)
+        
         existent_user = Users.query.filter_by(username__user=username).first()
-        if jsonRequest['password1'] != jsonRequest['password2']:
+        if password1 != password2:
             return jsonify('Passwords do not match'), 401
         if existent_user is None:
             #hash the password
-            hashed_pw = generate_password_hash(jsonRequest["password1"], method="sha256")
+            hashed_pw = generate_password_hash(str(password1), method="sha256")
             #create a new user from clas User
-            new_user = Users(username__user=username,
-                                    name__user = jsonRequest['name'],
-                                    lastname__user = jsonRequest['lastname'], 
-                                    password__user=hashed_pw,
-                                    phone_number__user=jsonRequest['phone'] if 'phone' in jsonRequest else '',
-                                    email__user=jsonRequest['email'] if 'email' in jsonRequest else None)
+            new_user = Users(
+                username__user=username,
+                name__user = request.json.get('name'),
+                lastname__user = request.json.get('lastname'),
+                password__user=hashed_pw,
+                phone_number__user=request.json.get("phone", ''),
+                email__user=request.json.get("email", None)
+            )
             #save the user in the database
+            db.session.add(new_user)
+            db.session.commit()
+
             token = jwt.encode(
                 {
                     'id' : new_user.id__user, 
                     'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
                 }, 
-                current_app.config['SECRET_KEY'])
-            db.session.add(new_user)
-            db.session.commit()
+                current_app.config['SECRET_KEY']
+            )
+
             return jsonify(
                 {
                     "message":"The user has beeen registered successfully.", 
                     "token": token,
                     "username": new_user.username__user
                 }
-                ), 201
+            ), 201
         else:
             return jsonify("The user already exists."),303
     else:
         return "Method not allowed"
+
 
 @users.route('/updateUser', methods=['POST', 'PUT'])
 def update_user(): 
@@ -76,6 +80,7 @@ def update_user():
         db.session.commit()
         return jsonify("The user has beeen updated successfully.")
 
+
 #DELETE USER
 @users.route('/deleteUser/<int:id>', methods=["DELETE"])
 def delete_user(id):
@@ -86,8 +91,8 @@ def delete_user(id):
     db.session.commit()
     return jsonify("The user has been deleted successfully!."), 200
 
+
 @users.route('/users')
-@token_required
 def render_users(current_user):
     # current user probablemente lo vayamos a usar después para validar roles
     users = Users.query.all()

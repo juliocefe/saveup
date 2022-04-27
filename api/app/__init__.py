@@ -1,12 +1,8 @@
-from flask import Flask, session, g, redirect, url_for, request, make_response, jsonify, send_from_directory
+from flask import Flask, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-import unittest
-import datetime
-from functools import wraps
-import jwt
-import uuid
+from flask_jwt_extended import JWTManager
 import os
 
 # ESTO NO SE SI SEA LO MEJOR PERO ME FUNCIONA
@@ -14,7 +10,7 @@ import os
 # un problema de flujo de la app, ya que los blueprints son importados antes que todo(cuando creamos la app,
 # en la funcón create_app) no se puede importar antes en los blue prints blueprints algo que estás creando después.
 #  NO PUEDES TENER IMPORTADO NADA QUE SEA CREA DESPUES, POR ESO IMPORTO ALGO Null que después tomará una valor 0.0
-token_required = None
+# token_required = None
 
 db = SQLAlchemy()
 
@@ -39,32 +35,14 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
 
     from app.models import Users
-    def token_required_FAKE(f):
-        @wraps(f)
-        def decorated(*args, **kwargs):
-            token = None
-            if 'x-access-token' in request.headers:
-                token = request.headers['x-access-token']
-
-            if not token:
-                return jsonify({'message' : 'Token is missing!'}), 401
-
-            try: 
-                data = jwt.decode(token, app.config['SECRET_KEY'])
-                current_user = Users.query.filter_by(id__user=data['id']).first()
-            except:
-                return jsonify({'message' : 'Token is invalid!'}), 401
-
-            return f(current_user, *args, **kwargs)
-        return decorated
-
-    global token_required 
-    token_required = token_required_FAKE
 
     db.init_app(app)
 
     #migrations object
     migrate = Migrate(app, db)
+
+    # JWD
+    jwt = JWTManager(app)
 
     from app.auth import auth
     app.register_blueprint(auth)

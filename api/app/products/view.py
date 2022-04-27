@@ -1,11 +1,8 @@
 from flask import jsonify, request
-
+from flask_jwt_extended import jwt_required
 from app.models import Products
-
 from . import products
-
 from app import db
-from app import token_required
 
 
 @products.route('/registerProducts', methods=['POST'])
@@ -24,9 +21,9 @@ def register_products():
     return jsonify('done!!!'), 201
 
 
-@products.route('/products')
-@token_required
-def get_products(current_user):
+@products.route('/')
+@jwt_required()
+def get_products():
     # current user probablemente lo vayamos a usar después para validar roles
     products = Products.query.all()
     response = []
@@ -39,5 +36,5 @@ def get_products(current_user):
             'image': product.image__product
         }
         response.append(dic)
-    return jsonify({'data':response})
+    return jsonify({'data': response})
     
