@@ -102,7 +102,7 @@ export const ProductsList = (props) => {
           <button className="btn btn-danger btn-sm visible rojito">
             <a
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               href="https://www.google.com/maps/search/?api=1&query=29.098370919338887,-110.9259108756669"
             >
               Go to Ley kino
