@@ -12,30 +12,28 @@ export const Login = () => {
   const username = useInputValue("");
   const password = useInputValue("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    fetch("/auth/login", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username.value,
-        password: password.value,
-      }),
-      headers: new Headers({
-        "content-type": "application/json",
-        // El metodo login de la API me pide una atorizaicón tipo básica
-        // btoa me crea un codigo base64.
-        Authorization: "Basic " + btoa(username.value + ":" + password.value),
-      }),
-    }).then(function (response) {
-      response
-        .json()
-        .then(function (data) {
-          activateAuth({ token: data.token, username: data.username });
-        })
-        .catch(function (err) {
-          console.log("Fetch Error :-S", err);
-        });
-    });
+    try {
+      const response = await fetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          username: username.value,
+          password: password.value,
+        }),
+        headers: new Headers({
+          "content-type": "application/json",
+        }),
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        activateAuth({ token: data.token, username: data.username });
+      } else {
+        alert("usuario o contrasena incorrectos.");
+      }
+    } catch (error) {
+      console.log("Fetch Error :-S", error);
+    }
   };
   return (
     <div className="main">
