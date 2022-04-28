@@ -1,15 +1,8 @@
 from flask import jsonify, request
-from app.models import (
-                        Lists, ListDetails, 
-                        Users, BranchOffices, 
-                        ProductDetails, Products,
-                        SuperMarkets,DateNow )
+from app.models import BranchOffices, ProductDetails, Products
 from . import lists
-
-
 from app import db
 
-from pdb import set_trace
 
 @lists.route('/generateList', methods=['POST'])
 def generate_list():
@@ -19,7 +12,7 @@ def generate_list():
     HowManyFromEacheProduct = []
     for product in products['products']:
         productList.append(product['id'])
-        HowManyFromEacheProduct.append({ 'idProduct':product['id'], 'quantity':product['quantity'] })
+        HowManyFromEacheProduct.append({'idProduct':product['id'], 'quantity':product['quantity'] })
     
     query = db.session.query(ProductDetails, Products, BranchOffices).filter(
               Products.id__product==ProductDetails.fk_product__product_detail,
