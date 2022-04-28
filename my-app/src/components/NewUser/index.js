@@ -12,33 +12,31 @@ export const NewUser = () => {
   const name = useInputValue("");
   const lastname = useInputValue("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    fetch("/users/newUser", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username.value,
-        password1: password1.value,
-        password2: password2.value,
-        name: name.value,
-        lastname: lastname.value,
-      }),
-      headers: new Headers({
-        "content-type": "application/json",
-        // El metodo login de la API me pide una atorizaicón tipo básica
-        // btoa me crea un codigo base64.
-        Authorization: "Basic " + btoa(`${username.value}:${password1.value}`),
-      }),
-    }).then(function (response) {
-      response
-        .json()
-        .then(function (data) {
-          activateAuth({ token: data.token, username: data.username });
-        })
-        .catch(function (err) {
-          console.log("Fetch Error :-S", err);
-        });
-    });
+    try {
+      const response = await fetch("/users/newUser", {
+        method: "POST",
+        body: JSON.stringify({
+          username: username.value,
+          password1: password1.value,
+          password2: password2.value,
+          name: name.value,
+          lastname: lastname.value,
+        }),
+        headers: new Headers({
+          "content-type": "application/json",
+        }),
+      });
+      const data = await response.json();
+      if (response.status === 201) {
+        activateAuth({ token: data.token, username: data.username });
+      } else {
+        alert(data);
+      }
+    } catch (error) {
+      console.log("Fetch Error :-S", error);
+    }
   };
 
   return (
@@ -60,11 +58,11 @@ export const NewUser = () => {
           </div>
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
-            <input className="form-control" {...password1} />
+            <input type="password" className="form-control" {...password1} />
           </div>
           <div className="form-group">
             <label htmlFor="password">Repita su contraseña</label>
-            <input className="form-control" {...password2} />
+            <input type="password" className="form-control" {...password2} />
           </div>
           <div className="form-group">
             <button className="btn btn-primary btn-block">Registrarse</button>
