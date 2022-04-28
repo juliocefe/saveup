@@ -72,14 +72,17 @@ export const PlusBtn = styled.div`
 `;
 
 export const SearchInput = styled.input`
+  display: flex;
   margin-bottom: 1rem;
-  width: 100%;
-  font-size: 14px;
+  width: 600px;
+  max-width: 600px;
+  text-align: center;
+  font-size: 18px;
   word-wrap: break-word;
   line-height: 1em;
   outline: 0;
+  align-self: center;
   white-space: normal;
-  min-height: 2em;
   background: #fff;
   display: block;
   padding: 1em 2em 1em 1em;
@@ -95,5 +98,8 @@ export const SearchInput = styled.input`
   :focus {
     border-color: #96c8da;
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  }
+  &::-webkit-input-placeholder {
+    color: lightgray;
   }
 `;

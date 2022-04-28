@@ -124,6 +124,7 @@ export const ProductsList = (props) => {
       </PlusBtn>
       <SearchInput
         type="text"
+        placeholder="Buscar producto"
         value={filter}
         onChange={(e) => {
           setFilter(e.target.value);
