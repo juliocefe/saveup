@@ -1,5 +1,9 @@
 import styled, { keyframes } from "styled-components";
 
+export const ButtonsContainer = styled.div`
+  margin-top: 5px;
+`;
+
 export const List = styled.ul`
   display: flex;
   justify-content: flex-start;
@@ -45,7 +49,7 @@ const animationBtn = keyframes`
 `;
 
 export const PlusBtn = styled.div`
-  margin-top: 3.5rem;
+  margin-top: 5.5rem;
   margin-bottom: 1rem;
   display: flex;
   visibility: visible;

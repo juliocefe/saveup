@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, Fragment } from "react";
 import { Product } from "../Product";
 
 import { List, Item } from "./styles";
-import { SearchInput, PlusBtn } from "./styles";
+import { SearchInput, PlusBtn, ButtonsContainer } from "./styles";
 
 import { Modal } from "./../../Modal";
 import { generateList } from "./../../Api/index";
@@ -109,7 +109,7 @@ export const ProductsList = (props) => {
             </a>
           </button>
         ) : (
-          <Fragment>
+          <ButtonsContainer>
             <button className="btn btn-sm invisible">Go to Ley kino</button>
             <button
               className="btn btn-primary"
@@ -119,7 +119,7 @@ export const ProductsList = (props) => {
             >
               Generate List !
             </button>
-          </Fragment>
+          </ButtonsContainer>
         )}
       </PlusBtn>
       <SearchInput
