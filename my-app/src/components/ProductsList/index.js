@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, Fragment } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Product } from "../Product";
 
 import { List, Item } from "./styles";
