@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
-export const ButtonsContainer = styled.div`
-  margin-top: 5px;
+export const Container = styled.div`
+  padding-top: 5.2rem;
 `;
 
 export const List = styled.ul`
@@ -44,17 +44,16 @@ export const Item = styled.li`
   }
 `;
 const animationBtn = keyframes`
-  0%   { background: red; color:white}
-  100% { background: transparent; color:red;}
+  0%   { background: green; color:white}
+  100% { background: transparent; color:green;}
 `;
 
 export const PlusBtn = styled.div`
-  margin-top: 5.5rem;
-  margin-bottom: 1rem;
   display: flex;
   visibility: visible;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
   & button {
     padding: 5px 1rem;
     font-size: 1.2rem;
@@ -76,16 +75,15 @@ export const PlusBtn = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  display: flex;
+  margin: auto;
   margin-bottom: 1rem;
-  width: 600px;
-  max-width: 600px;
+  width: 100%;
+  // max-width: 600px;
   text-align: center;
   font-size: 18px;
-  word-wrap: break-word;
+  // word-wrap: break-word;
   line-height: 1em;
   outline: 0;
-  align-self: center;
   white-space: normal;
   background: #fff;
   display: block;
