@@ -8,8 +8,8 @@ export const List = styled.ul`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  overflow: auto;
   list-style-type: none;
+  margin: 0 5px;
 `;
 
 export const TrueList = styled.ul`
@@ -28,13 +28,11 @@ export const TrueList = styled.ul`
 
 export const Item = styled.li`
   position: relative;
-  margin-bottom: 5px;
-  border-bottom: gray solid 1px;
+  margin-bottom: 8px;
   width: 100%;
   padding: 5px 15px;
-  background-color: #f7f7f7;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 1rem 0;
-
   &:focus {
     background-color: #96c8da;
   }
