@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, Fragment } from "react";
 import { Product } from "../Product";
 
 import { List, Item } from "./styles";
-import { SearchInput, PlusBtn, ButtonsContainer } from "./styles";
+import { SearchInput, PlusBtn, Container } from "./styles";
 
 import { Modal } from "./../../Modal";
 import { generateList } from "./../../Api/index";
@@ -96,21 +96,20 @@ export const ProductsList = (props) => {
     setFilteredProducts(props.api);
   }, [props.api]);
   return (
-    <Fragment>
-      <PlusBtn className={carList.length >= 1 ? "visible" : "invisible"}>
-        {generatedList.goToBuy ? (
-          <button className="btn btn-danger btn-sm visible rojito">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.google.com/maps/search/?api=1&query=29.098370919338887,-110.9259108756669"
-            >
-              Go to Ley kino
-            </a>
-          </button>
-        ) : (
-          <ButtonsContainer>
-            <button className="btn btn-sm invisible">Go to Ley kino</button>
+    <Container>
+      {carList.length > 0 ? (
+        <PlusBtn>
+          {generatedList.goToBuy ? (
+            <button className="btn btn-success rojito">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.google.com/maps/search/?api=1&query=29.098370919338887,-110.9259108756669"
+              >
+                Go to Ley kino
+              </a>
+            </button>
+          ) : (
             <button
               className="btn btn-primary"
               onClick={async () => {
@@ -119,9 +118,9 @@ export const ProductsList = (props) => {
             >
               Generate List !
             </button>
-          </ButtonsContainer>
-        )}
-      </PlusBtn>
+          )}
+        </PlusBtn>
+      ) : null}
       <SearchInput
         type="text"
         placeholder="Buscar producto"
@@ -153,6 +152,6 @@ export const ProductsList = (props) => {
           setGeneratedList={setGeneratedList}
         />
       )}
-    </Fragment>
+    </Container>
   );
 };
