@@ -12,5 +12,4 @@ export const SearchContainer = styled.div`
   @media (max-width: 768px) {
     border-bottom: lightgray solid 1px;
   }
-  border-bottom: solid 1px gray;
 `;
